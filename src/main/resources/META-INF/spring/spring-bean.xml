@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<context:property-placeholder location="classpath:/META-INF/mail.properties"
+		ignore-unresolvable="true" />
+
+	<!-- Resources Bean -->
+	<bean id="retailOrderAssembler" class="com.mrk.myordershop.assembler.OrderAssembler">
+		<constructor-arg name="role" value="ROLE_RETAIL" />
+	</bean>
+	<bean id="wsalerOrderAssembler" class="com.mrk.myordershop.assembler.OrderAssembler">
+		<constructor-arg name="role" value="ROLE_WSALER" />
+	</bean>
+	<bean id="supplierWholesalerOrderAssembler" class="com.mrk.myordershop.assembler.WholesalerOrderAssembler">
+		<constructor-arg name="role" value="ROLE_SUPPLIER" />
+	</bean>
+	<bean id="wholesalerOrderAssembler" class="com.mrk.myordershop.assembler.WholesalerOrderAssembler">
+		<constructor-arg name="role" value="ROLE_WSALER" />
+	</bean>
+	<bean id="wholesalerItemAssembler" class="com.mrk.myordershop.assembler.ItemAssembler">
+		<constructor-arg name="role" value="ROLE_WSALER" />
+	</bean>
+
+	<bean id="supplierItemAssembler" class="com.mrk.myordershop.assembler.ItemAssembler">
+		<constructor-arg name="role" value="ROLE_SUPPLIER" />
+	</bean>
+	<bean id="retailerItemAssembler" class="com.mrk.myordershop.assembler.ItemAssembler">
+		<constructor-arg name="role" value="ROLE_RETAIL" />
+	</bean>
+
+
+	<!-- Notifier -->
+	<bean id="IOSPNotifier" class="com.mrk.myordershop.notify.IOSPNotifier">
+		<constructor-arg name="passphrase" value="${push.ios.passphrase}" />
+		<constructor-arg name="p12fileName" value="${push.ios.p12}" />
+	</bean>
+	<bean id="androidNotifier" class="com.mrk.myordershop.notify.AndroidNotifier">
+		<constructor-arg name="apiKey" value="${push.android.apiKey}" />
+	</bean>
+	<bean id="WebNotifier" class="com.mrk.myordershop.notify.WebNotifier"></bean>
+	<bean id="smsNotifier" class="com.mrk.myordershop.notify.SMSNotifier">
+		<constructor-arg name="senderid" value="${sms.senderid}" />
+		<constructor-arg name="username" value="${sms.username}" />
+		<constructor-arg name="password" value="${sms.password}" />
+		<property name="webClient" value="${app.webclient}"></property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="3145728" />
+	</bean>
+
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<value>
+				resource.loader=class
+				class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+			</value>
+		</property>
+	</bean>
+
+</beans>
