@@ -26,25 +26,25 @@
 	
    
 	<div class="well well-lg" style="margin-top:65px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;min-height: 0;padding: 24px;margin-bottom: 30px;background-color: #fbfbfb;border: 0;border-radius: 6px;-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);box-shadow: 0 0 3px rgba(0,0,0,.2);-webkit-border-radius: 2px;-webkit-background-clip: padding-box;-moz-border-radius: 2px;-moz-background-clip: padding;background-clip: padding-box;-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);color: #262626;position: relative;">
-		#set ($myordershopios = "myordershopios")
-		#set ($myordershopweb = "myordershopweb")
-		#set ($myordershopandroid = "myordershopandroid")
+		#set (${myordershopios} = "myordershopios")
+		#set (${myordershopweb} = "myordershopweb")
+		#set (${myordershopandroid} = "myordershopandroid")
 	   <p style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;orphans: 3;widows: 3;margin: 0 0 10px;line-height: 22px;">
         Your Account has been login attempted with 
-		#set ($successAttemp = "SUCCESS")
-		#set ($failureAttemp = "FAILUR")
-		#if( $history.attempt == $successAttemp )
+		#set (${successAttemp} = "SUCCESS")
+		#set (${failureAttemp} = "FAILUR")
+		#if( ${history.attempt} == ${successAttemp} )
 			Success
-		#elseif( $history.attempt == $failureAttemp )
+		#elseif( ${history.attempt} == ${failureAttemp} )
 			Failure
 		#end 
 		by 
-		#if( $history.clientId == $myordershopios )
+		#if( ${history.clientId} == "myordershopios")
 			<a href="https://itunes.apple.com/in/app/my-order-shop/id1046219274">MyOrderShop IOS App </a>
-		#elseif( $history.clientId == $myordershopweb )
+		#elseif( ${history.clientId} == "myordershopweb" )
 			<a href="http://www.myordershop.com">MyOrderShop.com</a>
-		#elseif( $history.clientId == $myordershopandroid )
-			<a href="https://itunes.apple.com/in/app/my-order-shop/id1046219274">MyOrderShop Android App</a>
+		#elseif( ${history.clientId} == "myordershopandroid" )
+			<a href="https://play.google.com/store/apps/details?id=com.mrkinnoapps.myordershopandroid">MyOrderShop Android App</a>
 		#end
 		</p>
 		 <p>at </p>
