@@ -1,0 +1,66 @@
+<script th:src="@{/resources/libs/jquery.validate.js}"></script>
+<div class="content-bar"
+	th:attr="ng-init='page.set('+${page.number+1}+','+${page.size}+','+${page.totalElements}+')'">
+	
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li class="active">Devices</li>
+	</ul>
+</div>
+<!-- /.content-bar -->
+
+
+<div class="content-body" th:with="df=#{app.df.short}">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<h3 class="panel-title">Devices</h3>
+				</div>
+				<!-- <div class="row">
+					
+					
+				</div> -->
+
+				<!-- /panel-heading -->
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S-no</th>
+								<th>Device Token</th>
+								<th>Cilent Id</th>
+								<!-- <th>Created On</th> -->
+								<th>User ID</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="device,rowState : ${page.Content}">
+								<td th:text="${pageable.offset+rowState.count}"></td>
+								<td data-toggle="tooltip" data-placement="top" th:title="${device.deviceToken}" class="dots" th:text="${device.deviceToken}!=null?${device.deviceToken}:'Not Available'"></td>
+								<td th:text="${device.userId}!=null?${device.userId}:'Not Available'"></td>
+								<!-- <td th:text="${device.createTimestamp}!=null?${#dates.format(device.createTimestamp,df)}:'Not Available'"></td> -->
+								<td th:text="${device.clientId}!=null?${device.clientId}:'Not Available'"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-left">
+						<h5
+							th:text="'showing '+${pageable.offset+1}+' to '+${totalcount+pageable.offset}+' of '+${page.totalElements}+' entries'"></h5>
+					</div>
+					<div align="right">
+						<uib-pagination total-items="page.totalElements"
+							ng-model="page.number" max-size="7" boundary-links="true"
+							ng-change="page.pageChanged()"></uib-pagination>
+					</div>
+				</div>
+			</div>
+			<!-- /panel -->
+		</div>
+	</div>
+</div>
+<script>
+	
+</script>

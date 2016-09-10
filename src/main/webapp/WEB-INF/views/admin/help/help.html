@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div tiles:fragment="title">Help</div>
+	<!-- ============================================
+    MAIN CONTENT SECTION
+    =============================================== -->
+	<section class="content-wrapper" role="main">
+      <div class="content">
+        <div id="content-hero" class="content-hero">
+          <img class="content-hero-embed" th:src="@{/resources/asserts/images/dummy/people4.jpg}" alt="cover"/>
+          <div class="content-hero-overlay bg-grd-blue"></div>
+          <div class="content-hero-body">
+            <div class="content-bar">
+              <div class="pull-right" role="group">
+                <a data-toggle="modal" href="#" data-scripts="_includes/setups.js" data-target="#templateSetup" title="Template Setups" aria-label="template setups" class="btn btn-icon btn-sm btn-default" href="#"><span class="icon-settings fa-lg text-muted"></span></a>
+              </div>
+              <ul class="breadcrumb breadcrumb-angle">
+                <li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+                <li><a href="#">Pages</a></li>
+                <li class="active">Help</li>
+              </ul>
+            </div><!-- /.content-bar -->
+            <h1>Help Page</h1>
+          </div><!-- /.content-hero-body -->
+        </div><!-- /.content-hero -->
+
+
+        <div class="content-body">
+          <div class="row">
+            <div class="col-md-3 col-md-push-9 visible-lg visible-md" id="help-control">
+              <ul data-spy="affix" data-offset-top="207" class="help-control nav nav-tabs nav-stacked nav-contrast-teal mt-4x" role="tablist">
+                <li role="presentation" class="active"><a href="#getStarted" aria-controls="get started">Get Started</a></li>
+                <li role="presentation"><a href="#learnBasic" aria-controls="basic">Basic</a></li>
+                <li role="presentation"><a href="#pppMore" aria-controls="project and more">Project and more</a></li>
+                <li role="presentation"><a href="#appExMod" aria-controls="apps">Apps</a></li>
+                <li role="presentation"><a href="#useAPI" aria-controls="use api">Use API</a></li>
+                <li role="presentation"><a href="#contactUs" aria-controls="contact us">Contact Us</a></li>
+              </ul><!-- /.nav -->
+
+            </div><!-- /.cols -->
+            <div class="col-md-9 col-md-pull-3">
+              <p class="pull-right mt-1x"><small><a href="#" class="text-muted">5 Topics</a></small></p>
+              <h2 class="no-vmargin">
+                <span>Get started with Wrapkit</span>
+              </h2>
+              <div class="panel-group mt-1x mb-4x" id="getStarted" role="tablist" aria-multiselectable="true">
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#getStarted" data-target="#getStarted1" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">What is Wrapkit?</h3>
+                  </div>
+                  <div id="getStarted1" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#getStarted1 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#getStarted" data-target="#getStarted2" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Understanding Wrapkit ecosystems</h3>
+                  </div>
+                  <div id="getStarted2" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#getStarted2 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#getStarted" data-target="#getStarted3" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">How do debut work?</h3>
+                  </div>
+                  <div id="getStarted3" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#getStarted3 -->
+                </div><!-- /.panel -->
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#getStarted" data-target="#getStarted4" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Create and Manage your Account</h3>
+                  </div>
+                  <div id="getStarted4" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#getStarted4 -->
+                </div><!-- /.panel -->
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#getStarted" data-target="#getStarted5" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Recovery and Safety</h3>
+                  </div>
+                  <div id="getStarted5" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#getStarted5 -->
+                </div><!-- /.panel -->
+              </div><!-- /.panel-group -->
+
+
+              <p class="pull-right mt-1x"><small><a href="#" class="text-muted">4 Topics</a></small></p>
+              <h2>
+                <span>Learn the basics</span>
+              </h2>
+              <div class="panel-group mb-4x" id="learnBasic" role="tablist" aria-multiselectable="true">
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#learnBasic" data-target="#learnBasic1" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Take a tour of App Features</h3>
+                  </div>
+                  <div id="learnBasic1" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#learnBasic1 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#learnBasic" data-target="#learnBasic2" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">System requirements</h3>
+                  </div>
+                  <div id="learnBasic2" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#learnBasic2 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#learnBasic" data-target="#learnBasic3" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Install guide</h3>
+                  </div>
+                  <div id="learnBasic3" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#learnBasic3 -->
+                </div><!-- /.panel -->
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#learnBasic" data-target="#learnBasic4" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Personalize your App</h3>
+                  </div>
+                  <div id="learnBasic4" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#learnBasic4 -->
+                </div><!-- /.panel -->
+              </div><!-- /.panel-group -->
+
+
+              <p class="pull-right mt-1x"><small><a href="#" class="text-muted">6 Topics</a></small></p>
+              <h2>
+                <span>Projects, Posts, Photos, and more</span>
+              </h2>
+              <div class="panel-group mb-4x" id="pppMore" role="tablist" aria-multiselectable="true">
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#pppMore" data-target="#pppMore1" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Aperiam accusamus eligendi quibusdam id porro rem</h3>
+                  </div>
+                  <div id="pppMore1" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#pppMore1 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#pppMore" data-target="#pppMore2" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Incidunt architecto corporis</h3>
+                  </div>
+                  <div id="pppMore2" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#pppMore2 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#pppMore" data-target="#pppMore3" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Ullam accusamus, cumque, delectus tenetur totam ut</h3>
+                  </div>
+                  <div id="pppMore3" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#pppMore3 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#pppMore" data-target="#pppMore4" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Eligendi sapiente possimus</h3>
+                  </div>
+                  <div id="pppMore4" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#pppMore4 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#pppMore" data-target="#pppMore5" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Vitae earum ratione ad cum voluptatibus impedit</h3>
+                  </div>
+                  <div id="pppMore5" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#pppMore5 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#pppMore" data-target="#pppMore6" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Perspiciatis id ipsam sit eveniet atque reiciendis</h3>
+                  </div>
+                  <div id="pppMore6" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#pppMore6 -->
+                </div><!-- /.panel -->
+              </div><!-- /.panel-group -->
+
+
+
+              <p class="pull-right mt-1x"><small><a href="#" class="text-muted">2 Topics</a></small></p>
+              <h2>
+                <span>Apps, extensions, modules</span>
+              </h2>
+              <div class="panel-group mb-4x" id="appExMod" role="tablist" aria-multiselectable="true">
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#appExMod" data-target="#appExMod1" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Aperiam accusamus eligendi quibusdam id porro rem</h3>
+                  </div>
+                  <div id="appExMod1" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#appExMod1 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#appExMod" data-target="#appExMod2" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Incidunt architecto corporis</h3>
+                  </div>
+                  <div id="appExMod2" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#appExMod2 -->
+                </div><!-- /.panel -->
+              </div><!-- /.panel-group -->
+
+
+
+              <p class="pull-right mt-1x"><small><a href="#" class="text-muted">3 Topics</a></small></p>
+              <h2>
+                <span>Use API</span>
+              </h2>
+              <div class="panel-group mb-4x" id="useAPI" role="tablist" aria-multiselectable="true">
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#useAPI" data-target="#useAPI1" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Aperiam accusamus eligendi quibusdam id porro rem</h3>
+                  </div>
+                  <div id="useAPI1" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#useAPI1 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#useAPI" data-target="#useAPI2" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Incidunt architecto corporis</h3>
+                  </div>
+                  <div id="useAPI2" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#useAPI2 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#useAPI" data-target="#useAPI3" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Ullam accusamus, cumque, delectus tenetur totam ut</h3>
+                  </div>
+                  <div id="useAPI3" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#useAPI3 -->
+                </div><!-- /.panel -->
+              </div><!-- /.panel-group -->
+
+
+
+              <p class="pull-right mt-1x"><small class="pull-right"><a href="#" class="text-muted">6 Topics</a></small></p>
+              <h2>
+                <span>Contact Us</span>
+              </h2>
+              <div class="panel-group mb-4x" id="contactUs" role="tablist" aria-multiselectable="true">
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#contactUs" data-target="#contactUs1" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Aperiam accusamus eligendi quibusdam id porro rem</h3>
+                  </div>
+                  <div id="contactUs1" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#contactUs1 -->
+                </div><!-- /.panel -->
+
+                <div class="panel" data-fill-color="true">
+                  <div class="panel-heading p-2x" role="button" data-toggle="collapse" data-parent="#contactUs" data-target="#contactUs2" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Incidunt architecto corporis</h3>
+                  </div>
+                  <div id="contactUs2" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia asperiores voluptatum rem, culpa ut nemo maiores tempore, perspiciatis in mollitia ab, repudiandae quam et. Eligendi quia harum corporis itaque necessitatibus?</p>
+                    </div><!-- /.panel-body -->
+                  </div><!-- /#contactUs2 -->
+                </div><!-- /.panel -->
+              </div><!-- /.panel-group -->
+
+            </div><!-- /.cols -->
+
+          </div><!-- /.row -->
+        </div><!-- /.content-body -->
+
+
+        <!-- Template Setups -->
+        <div class="modal fade" id="templateSetup">
+          <div class="modal-dialog">
+            <!-- modal-content -->
+            <div class="modal-content"></div>
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.templateSetup -->
+
+      </div><!-- /.content -->
+    </section><!-- /MAIN -->
+
+</body>
+</html>

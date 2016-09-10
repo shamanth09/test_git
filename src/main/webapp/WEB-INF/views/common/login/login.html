@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+</head>
+<body>
+	<div tiles:fragment="title">My Order Shop Admin</div>
+	<div tiles:fragment="content">
+		<div class="tab-content">
+			<p class="text-center p-4x">
+				<!-- <img th:src="@{/resources/assets/images/logo/logo.png}"
+					alt="wrapkit" height="28px" /> -->
+					<img style="height: 90px;"
+					th:src="@{/resources/assets/images/favicons/myOrderShopIcon.png}" />
+			<h2 align="center" style="margin-top: -8%;">My Order Shop</h2>
+			</p>
+			<div class="tab-pane fade in active" id="signin">
+				<form id="signinForm" th:action="@{/login}" role="form"
+					method="post">
+					<p class="lead" align="center">Administration</p>
+					<div class="form-group">
+						<div class="input-group input-group-in">
+							<span class="input-group-addon"><i class="icon-user"></i></span>
+							<input name="username" id="username" class="form-control"
+								placeholder="Username" />
+						</div>
+					</div>
+					<!-- /.form-group -->
+					<div class="form-group">
+						<div class="input-group input-group-in">
+							<span class="input-group-addon"><i class="icon-lock"></i></span>
+							<input type="password" name="password" id="password"
+								class="form-control" placeholder="Password" /> <input
+								type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+						</div>
+					</div>
+					<!-- /.form-group -->
+					<div class="form-group clearfix">
+						<div class="animated-hue pull-right">
+							<button id="btnSignin" type="submit" class="btn btn-primary">Signin</button>
+						</div>
+						<div class="nice-checkbox nice-checkbox-inline">
+							<input type="checkbox" name="keepSignin" id="keepSignin"
+								checked="checked" /> <label for="keepSignin">Keep me
+								sign in</label>
+						</div>
+					</div>
+					<!-- /.form-group -->
+				</form>
+				<!-- /#signinForm -->
+			</div>
+			<!-- /.tab-pane -->
+
+		</div>
+		<!-- /.tab-content -->
+
+		<!-- Modal Recover -->
+		<div class="modal fade" id="recoverAccount" tabindex="-1"
+			role="dialog" aria-labelledby="recoverAccountLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="recoverForm"
+						action="http://bentkwek.com/items/preview/wrapkit/1.2/index.html">
+						<div class="modal-header">
+							<h4 class="modal-title" id="recoverAccountLabel">Reset
+								Password</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<div class="input-group input-group-in">
+									<span class="input-group-addon"><i
+										class="fa fa-envelope-o text-muted"></i></span> <input type="email"
+										name="recoverEmail" id="recoverEmail" class="form-control"
+										placeholder="Enter your email address" />
+								</div>
+							</div>
+							<!-- /.form-group -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Send reset
+								link</button>
+						</div>
+					</form>
+					<!-- /#recoverForm -->
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /#recoverAccount -->
+	</div>
+</body>
+</html>

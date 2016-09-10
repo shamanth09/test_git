@@ -1,0 +1,261 @@
+<script th:src="@{/resources/libs/jquery.validate.js}"></script>
+<script th:src="@{/resources/libs/dropzone.min.js}"></script>
+<div class="content-bar">
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#/" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li><a href="#/">Orders</a></li>
+		<li><a th:href="'#/orders/'+${order.id}"
+			th:text="'orders-'+${order.id}"></a></li>
+		<li class="active" th:text="${order.id}"></li>
+	</ul>
+</div>
+<!-- /.content-bar -->
+
+<div class="content-body" th:with="df=#{app.df.medium}">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="icon-note fa-fw"></i><span>order Edit</span>
+					</h3>
+				</div>
+				<!-- /panel-heading -->
+				<div class="panel-body">
+					<div class="col-md-6">
+						<form role="form" th:action="@{'orders/xhr/'+*{id}}"
+							th:object="${order}" method="post" validate-form=""
+							submit-handler="updateOrder">
+							<input type="hidden" class="form-control" th:field="*{id}" /> <input
+								type="hidden" class="form-control" th:field="*{item.id}" /> <input
+								type="hidden" class="form-control" th:field="*{item.detail.id}" />
+							<div class="form-group">
+								<label class="control-label">Ordered-date:</label>
+								<div class="input-group input-group-in">
+									<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+									<input data-input="daterangepicker" data-time-picker="true"
+										th:field="*{createTimestamp}" data-single-date-picker="true"
+										class="form-control" required="required" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="name">Order-Status:</label> <select
+									class="form-control" th:field="*{orderStatus}" select2="">
+									<option th:each="status : ${orderstatus}" th:value="${status}"
+										th:text="${status}"></option>
+								</select>
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">Sample-From:</label> <select
+									class="form-control" th:field="*{sampleFrom}" select2="">
+									<option th:each="role : ${roles}" th:value="${role}"
+										th:text="${role}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="control-label">Expected-date:</label>
+								<div class="input-group input-group-in">
+									<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+									<input data-input="daterangepicker" data-time-picker="true"
+										th:field="*{expectedDate}" data-single-date-picker="true"
+										class="form-control" required="required" />
+								</div>
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">RateCut:</label> <input
+									type="number" class="form-control" th:field="*{rateCut}"
+									required="required" />
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">CustomerName:</label> <input
+									type="text" class="form-control" th:field="*{customerName}"
+									required="required" />
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">Advance:</label> <input
+									type="text" class="form-control" th:field="*{advance}"
+									required="required" />
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">CustomerMobile:</label>
+								<input type="text" class="form-control"
+									th:field="*{customerMobile}" required="required" />
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">CustomerFirmName:</label>
+								<input type="text" class="form-control"
+									th:field="*{customerFirmName}" required="required" />
+							</div>
+							<div class="form-group"
+								th:if="${order instanceof WholesalerInstantOrder}">
+								<label class="control-label" for="name">SampleDiscription:</label>
+								<span class="input-icon icon-right"> <textarea
+										class="form-control" rows="5" th:field="*{sampleDescription}">
+																</textarea></span>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="name">Description: </label>
+								<!-- <input
+									type="text" class="form-control" th:field="*{description}" /> -->
+								<span class="input-icon icon-right"> <textarea
+										class="form-control" rows="5" th:field="*{description}">
+																</textarea></span>
+							</div>
+							<h4>Item:</h4>
+							<hr style="margin-top: 5px" />
+							<!-- <div class="form-group" product-initailier-from-category="" change-measurement="changeStateOfProduct(list)"> -->
+							<div class="form-group" id="category">
+								<label class="control-label" for="name">Product-Category:
+								</label><select class="form-control"
+									th:field="*{item.product.category.id}" select2="">
+									<option th:each="category : ${categories}"
+										th:value="${category.id}" th:text="${category.name}"></option>
+								</select>
+							</div>
+							<input type="hidden" th:value="${order.item.product.id}" id="check"/>
+							
+							<div class="form-group" id="product">
+								<label class="control-label" for="name">products: </label> <select
+									id="productId" class="form-control" th:attr="myvalue= *{item.product.id} "
+									 select2=""  name="item.product.id" required="required" >
+									<option  ng-repeat="p in products" value="{{ p.id }}">{{
+										p.name }}</option>
+										
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label" for="name">ActiveFlag: </label><select
+									class="form-control" th:field="*{activeFlag}" select2="">
+									<option th:each="status : ${activeflag}" th:value="${status}"
+										th:text="${status}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="name">Melting and
+									Sealing:</label> <select class="form-control"
+									th:field="*{item.meltingAndSeal.id}" select2="">
+									<option th:each="mas : ${meltingandsealing}"
+										th:value="${mas.id}"
+										th:text="${mas.melting}+' and '+${mas.seal}"></option>
+								</select>
+							</div>
+
+							<h4>Detail:</h4>
+							<hr style="margin-top: 5px" />
+
+							<div class="form-group"
+								ng-show="measurments.indexOf('LENGTH')>=0">
+								<label class="control-label" for="name">Length:</label> <input
+									id="Length" type="text" class="form-control"
+									th:field="*{item.detail.length}" />
+							</div>
+
+							<div class="form-group" ng-show="measurments.indexOf('HUCK')>=0">
+								<label class="control-label" for="name">Huck:</label> <input
+									id="Huck" type="text" class="form-control"
+									th:field="*{item.detail.huck}" />
+							</div>
+
+							<div class="form-group">
+								<label class="control-label" for="name">Weight:</label> <input
+									id="Weight" type="text" class="form-control"
+									th:field="*{item.detail.weight}" />
+							</div>
+
+							<div class="form-group" ng-show="measurments.indexOf('SIZE')>=0">
+								<label class="control-label" for="name">Size:</label> <input
+									id="Size" type="text" class="form-control"
+									th:field="*{item.detail.size}" />
+							</div>
+
+							<div class="form-group"
+								ng-show="measurments.indexOf('BACK_CHAIN')>=0">
+								<label class="control-label" for="name">BackChain:</label> <input
+									id="BackChain" type="text" class="form-control"
+									th:field="*{item.detail.backChain}" />
+							</div>
+
+							<div class="form-group"
+								ng-show="measurments.indexOf('WITH_SCREW')>=0">
+								<label class="control-label" for="name">withScrew:</label> <input
+									id="withScrew" type="text" class="form-control"
+									th:field="*{item.detail.withScrew}" />
+							</div>
+
+							<div class="form-group"
+								ng-show="measurments.indexOf('INITIAL')>=0">
+								<label class="control-label" for="name">Initial:</label> <input
+									id="Initial" type="text" class="form-control"
+									th:field="*{item.detail.initial}" />
+							</div>
+
+							<div class="form-group"
+								ng-show="measurments.indexOf('SIZE_TYPE')>=0">
+								<label class="control-label" for="name">SizeType:</label> <input
+									id="SizeType" type="text" class="form-control"
+									th:field="*{item.detail.sizeType}" />
+							</div>
+
+							<div class="form-group" ng-show="measurments.indexOf('LINES')>=0">
+								<label class="control-label" for="name">Lines:</label> <input
+									id="Lines" type="number" class="form-control"
+									th:field="*{item.detail.lines}" />
+							</div>
+							<div class="form-group">
+								<label class="control-label" for="name">Quantity:</label> <input
+									type="number" class="form-control"
+									th:field="*{item.detail.quantity}" required="required" />
+							</div>
+
+							<div class="form-group">
+								<label class="control-label" for="name">Remark:</label> <input
+									type="text" class="form-control"
+									th:field="*{item.detail.remarks}" />
+							</div>
+
+							<div class="form-group"
+								ng-show="measurments.indexOf('WEIGHT')>=0">
+								<label class="control-label" for="name">StoneWeight:</label> <input
+									type="text" class="form-control"
+									th:field="*{item.detail.stoneWeight}" />
+							</div>
+
+							<p th:text="${ pro }"></p>
+							<div class="form-group clearfix">
+								<div class="pull-right">
+									<a th:href="'orders#/orders/'+${order.id}"
+										class="btn btn-default">Cancel</a>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-3 col-md-offset-2">
+						<form
+							th:action="@{orders/xhr/{orderId}/images(orderId=${order.id})}"
+							class="dropzone border-teal" dropzone="" method="post"
+							enctype="multipart/form-data" maxFilesize="2"
+							style="text-align: center;"
+							th:attr="image-url=${order.image!=null}?@{orders/{orderId}/images?activeId={{ activeId }}(orderId=${order.id})}"
+							th:headers="'{\''+${_csrf.headerName}+'\':\''+${_csrf.token}+'\'}'"
+							th:title="${order.item.product.name}">
+							<div class="fallback">
+								<input name="file" type="file" />
+							</div>
+							<div class="dz-message">
+								<h3>Drop files here or click to upload.</h3>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

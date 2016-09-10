@@ -1,0 +1,56 @@
+<script th:src="@{/resources/libs/select2/js/select2.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/resources/libs/jquery.validate.js}"></script>
+<div class="content-body">
+	<div class="panel" data-fill-color="true">
+		<div class="panel-heading">
+			<h2 class="panel-title" th:text="${currentUser.name}+'\'s relations'"></h2>
+		</div>
+		<div class="panel-body">
+			<form role="form"
+				th:action="@{'relations/xhr/'+${currentUser.id}+'/user-relation-edit/'+*{id}}"
+				th:object="${relation}" method="post" validate-Form=""
+				submit-handler="updateRelation">
+				<div class="row">
+					<input type="hidden" th:field="*{id}" />
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label"> User Name <a th:href="'users#/users/'+${temp}"
+								th:with="temp=*{primaryUser.name} != ${currentUser.name} ? *{primaryUser.id} : *{secondaryUser.id}" th:text="*{primaryUser.name} != ${currentUser.name} ? *{primaryUser.email} : *{secondaryUser.email} "></a></label>
+							<input th:if="*{primaryUser.name}!=${currentUser.name}"
+								class="form-control" type="text" th:field="*{primaryUser.name}"
+								disabled="disabled" /> <input
+								th:if="*{secondaryUser.name}!=${currentUser.name}"
+								class="form-control" type="text"
+								th:field="*{secondaryUser.name}" disabled="disabled" />
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="select2">Status </label> <select
+								style="width: 100%" data-minimum-results-for-search="Infinity"
+								data-input="select2" th:field="*{status}" select2=""
+								required="required">
+								<option th:each="status : ${relationStatuses}"
+									th:text="${status}" th:value="${status}">*{status}</option>
+							</select>
+						</div>
+
+						<div class="form-group clearfix">
+							<div class="pull-right">
+								<a th:href="'#/user-relation/'+${currentUser.id}"
+									class="btn btn-default">Cancel</a>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</div>
+					</div>
+					<!-- /.form-group -->
+
+				</div>
+				<!-- /.form-group -->
+			</form>
+			<!-- /form -->
+		</div>
+		<!-- /.panel-body -->
+	</div>
+	<!-- /.panel -->
+</div>

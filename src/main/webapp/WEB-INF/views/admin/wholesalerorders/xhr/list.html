@@ -1,0 +1,137 @@
+<div class="content-bar"
+	th:attr="ng-init='page.set('+${page.number+1}+','+${page.size}+','+${page.totalElements}+')'">
+	<div class="pull-right" role="group">
+		<a data-toggle="modal" href="#"
+			th:attr="data-scripts=@{/resources/assets/_includes/setups.js}"
+			data-target="#templateSetup" title="Template Setups"
+			aria-label="template setups"
+			class="btn btn-nofill btn-sm btn-default"><span
+			class="icon-settings fa-lg text-muted"></span></a>
+	</div>
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li class="active">wholesalerorders</li>
+	</ul>
+</div>
+<!-- /.content-bar -->
+
+<div class="content-body" th:with="df=#{app.df.short}">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="row panel-heading">
+					<div class="col-lg-2 col-sm-1 col-xs-12 ">
+						<h3 class="panel-title">Wholesalerorders</h3>
+					</div>
+					<div class="col-lg-3">
+						<ui-select multiple="" ng-model="orderFilter"
+							on-select="selectedOrders($item)"
+							on-remove="deselectOrders($item)" theme="bootstrap"
+							style="width: 100%;margin-left:10px"> <ui-select-match
+							placeholder="Select customers...">{{$item.result}}
+						({{$item.label}}) </ui-select-match> <ui-select-choices
+							refresh="searchInOrder($select.search)" refresh-delay="0"
+							repeat="result in results">
+						<div>
+							<span ng-bind-html="result.result | highlight: $select.search"></span><span
+								class="pull-right" ng-bind="result.label"></span>
+						</div>
+						</ui-select-choices></ui-select>
+					</div>
+					<div class="col-lg-3">
+						<div data-my-daterangepicker="" id="reportrange"
+							class="pull-right"
+							user-recent-list="filterUserAccordingToDate(fromDate, toDate)"
+							delete-dates="cancelDates(id)"
+							style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+							<i class="fa fa-calendar"></i>&nbsp; <span>{{ dates }}</span>
+
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="" role="group" aria-label="Basic example">
+							<button ng-click="filter('ACTIVE')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid orange"
+								style="color: red;" title="ACTIVE"
+								ng-class="{'bg_buttonBackground': orderStatus.indexOf('ACTIVE')>=0}">
+								<i class="stat-icon fa fa-refresh"></i>
+							</button>
+							<button ng-click="filter('IN_PROGRESS')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid yellow"
+								style="color: yellow;" title="IN PROGRESS"
+								ng-class="{'bg_buttonBackground' :  orderStatus.indexOf('IN_PROGRESS')>=0}">
+								<i class="stat-icon fa fa-spinner"></i>
+							</button>
+							<button ng-click="filter('REJECTED')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid btn-azure"
+								style="color: FireBrick;" title="REJECTED"
+								ng-class="{'bg_buttonBackground' :  orderStatus.indexOf('REJECTED')>=0}">
+								<i class="stat-icon fa fa-exclamation"></i>
+							</button>
+							<button ng-click="filter('CANCELLED')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid magenta"
+								style="color: RebeccaPurple;" title="CANCELLED"
+								ng-class="{'bg_buttonBackground' :  orderStatus.indexOf('CANCELLED')>=0}">
+								<i class="stat-icon fa fa-remove"></i>
+							</button>
+							<button ng-click="filter('DISPATCHED')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid info"
+								style="color: RoyalBlue;" title="DISPATCHED"
+								ng-class="{'bg_buttonBackground' :  orderStatus.indexOf('DISPATCHED')>=0}">
+								<i class="stat-icon fa fa-truck"></i>
+							</button>
+						</div>
+					</div> 
+				</div>
+				<!-- /panel-heading -->
+				
+				<div class="table-responsive">
+					<table class="table table-hover" style="margin-top: 18px;">
+						<thead>
+							<tr>
+								<th><label>S.No</label></th>
+								<th><label>OrderNo</label></th>
+								<th><label>CreateDate</label></th>
+								<th><label>ProductName</label></th>
+								<th><label>SupplierName</label></th>
+								<th><label>OrderStatus</label></th>
+								<th><label>WholesalerName</label></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:attr="ng-click='onClickUser(\''+${worder.id}+'\');'"
+								th:each="worder,rowState : ${page.Content}">
+								<td th:text="${pageable.offset+rowState.count}"></td>
+								<td
+									th:text="${worder.OrderNo}!=null?${worder.OrderNo}:'NotAvailable'"></td>
+								<td
+									th:text="${worder.createTimestamp}!=null?${#dates.format(worder.createTimestamp,df)}:'Not Available'"></td>
+								<td
+									th:text="${worder.ProductName}!=null?${worder.ProductName}:'NotAvailable'"></td>
+								<td
+									th:text="${worder.SupplierName}!=null?${worder.SupplierName}:'NotAvailable'"></td>
+								<td><label style="color: white"
+									th:text="${worder.OrderStatus}!=null?${worder.orderStatus}:'NotAvailable'"
+									th:classappend="#{'classes.'+${worder.orderStatus}}"></label></td>
+								<td 
+									th:text="${worder.WholesalerName}!=null?${worder.WholesalerName}:'NotAvailable'"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-left">
+					<h5
+							th:text="'showing '+${pageable.offset+1}+' to '+${pageable.offset+totalcount}+' of '+${page.totalElements}+' entries'"></h5>
+					</div>
+					<div align="right">
+						<uib-pagination total-items="page.totalElements"
+							ng-model="page.number" max-size="7" boundary-links="true"
+							ng-change="page.pageChanged()"></uib-pagination>
+					</div>
+				</div>
+			</div>
+			<!-- /panel -->
+		</div>
+	</div>
+</div>

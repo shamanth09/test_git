@@ -1,0 +1,110 @@
+<div class="content-bar">
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#/" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li><a href="#/">Categories</a></li>
+		<li><a th:href="'#/'+${product.category.id}"
+			th:text="${product.category.name}"></a></li>
+		<li class="active" th:text="${product.name}"></li>
+	</ul>
+</div>
+<!-- /.content-bar -->
+
+<div class="content-body" th:with="df=#{app.df.medium}">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<div class="panel-control pull-right">
+						<a th:href="'#/products/'+${product.id}+'/edit'"
+							class="btn btn-icon"><i class="icon-note"></i> Edit</a>
+					</div>
+					<div class="panel-control pull-right">
+						<a th:attr="ng-click='deleteProduct(\''+${product.id}+'\');'"
+							class="btn btn-icon"><i class="icon-trash"></i>Delete</a>
+					</div>
+					<h3 class="panel-title">
+						<i class="icon-briefcase fa-fw"></i> <span
+							th:text="${product.name}"></span>
+					</h3>
+				</div>
+				<!-- /panel-heading -->
+				<div class="panel-body">
+					<div class="col-md-6">
+						<form role="form" class="form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Name</label>
+								<div class="col-sm-8">
+									<p class="form-control-static" th:text="${product.name}"></p>
+								</div>
+							</div>
+							<!--/form-group-->
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Category</label>
+								<div class="col-sm-8">
+									<p class="form-control-static"
+										th:text="${product.category.name}"></p>
+								</div>
+							</div>
+							<!--/form-group-->
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">SKU</label>
+								<div class="col-sm-8">
+									<p class="form-control-static"
+										th:text="${product.sku}?:'Not Available'"></p>
+								</div>
+							</div>
+							<!--/form-group-->
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Create Timestamp</label>
+								<div class="col-sm-8">
+									<p class="form-control-static"
+										th:text="${product.createTimestamp}?${#dates.format(product.createTimestamp,df)}"></p>
+								</div>
+							</div>
+							<!--/form-group-->
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Update Timestamp</label>
+								<div class="col-sm-8">
+									<p class="form-control-static"
+										th:text="${product.updateTimestamp}?${#dates.format(product.updateTimestamp,df)}:'Not Available'"></p>
+								</div>
+							</div>
+							<!--/form-group-->
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Measurements</label>
+								<div class="col-sm-8">
+									<span class="label label-default" 
+										th:each="measurement : ${product.measurements}"
+										th:text="${measurement.measurementValue}"> </span>
+								</div>
+							</div>
+						</form>
+						<!--/form-->
+					</div>
+					<div class="col-md-3 col-md-offset-2">
+							<img
+							class="dropzone border-teal" 
+							style="text-align: center;"
+							th:attr="src=${product.image!=null}?@{products/{productId}/images(productId=${product.id})}"
+							th:title="${product.name}" width="200px" height="200px">
+						</img>
+						
+						<!--/form-->
+
+					</div>
+				</div>
+				<!-- /panel-body -->
+				<!-- /panel -->
+			</div>
+		</div>
+	</div>
+</div>
+<script th:inline="javascript">
+productApp.value("product",{
+	"id":/*[[${product.id}]]*/,
+	"name":/*[[${product.name}]]*/
+});
+</script>

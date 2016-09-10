@@ -1,0 +1,140 @@
+
+<script th:src="@{/resources/libs/select2/js/select2.min.js}"
+	type="text/javascript"></script>
+<script
+	th:src="@{/resources/libs/ui-bootstrap/ui-bootstrap-custom-tpls-1.1.2.min.js}"></script>
+<script th:src="@{/resources/libs/jquery.validate.js}"></script>
+<div class="content-bar">
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li><a href="#/">Users</a></li>
+		<li>New-User</li>
+	</ul>
+</div>
+<div class="content-body">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<h3 class="panel-title">User</h3>
+				</div>
+				<div class="panel-body">
+					<form role="form" id="validate" th:action="@{users}"
+						th:object="${user}" method="post" submit-handler="addUser"
+						validate-form="">
+						<div class="row">
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label" for="basicName">Name </label> <input
+										class="form-control" type="text" th:field="*{name}" />
+								</div>
+
+								<div class="form-group">
+									<label class="control-label" for="basicName">Mobile</label>
+									<div class="input-group input-group-in">
+										<input class="form-control" type="number" th:field="*{mobile}"
+											required="required" maxlength="10" minlength="10"
+											th:attr="unique-mobile=@{/v1/cmn/users}" /> <span
+											class="input-group-addon"><i
+											class="fa fa-spin fa-circle-o-notch"></i></span>
+									</div>
+								</div>
+
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicEmail">Email</label>
+									<div class="input-group input-group-in">
+										<input class="form-control" type="email" th:field="*{email}"
+											required="required" th:attr="unique-email=@{/v1/cmn/users}" />
+										<span class="input-group-addon"><i
+											class="fa fa-spin fa-circle-o-notch"></i></span>
+									</div>
+									<!-- /input-group-in -->
+
+								</div>
+								<h4>Address</h4>
+								<hr style="margin-top: 5px" />
+								<div class="form-group">
+									<label class="control-label" for="basicName">FirmName</label> <input
+										class="form-control" type="text" th:field="*{address.title}"
+										required="required" />
+								</div>
+
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicEmail">Area</label> <input
+										class="form-control" type="text" th:field="*{address.area}"
+										 />
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="select2">User Role</label> <select style="width: 100%"
+										data-minimum-results-for-search="Infinity"
+										data-input="select2" placeholder="Select your time zone"
+										th:field="*{userRoles[0].id}" select2="" required="required">
+										<option th:each="role : ${roles}" th:text="${role.name}"
+											th:value="${role.id}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicText">Street</label> <input
+										class="form-control" type="text" th:field="*{address.street}"
+										/>
+								</div>
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicEmail">Landmark</label>
+									<input class="form-control" type="text"
+										th:field="*{address.landmark}" />
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="basicName">City</label> <input
+										class="form-control" type="text" th:field="*{address.city}"
+										/>
+								</div>
+
+
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicText">Pincode</label> <input
+										class="form-control" type="number" minlength="6" maxlength="6"
+										th:field="*{address.pincode}" />
+								</div>
+
+
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicText">State</label> <input
+										class="form-control" type="text" th:field="*{address.state}"
+										 />
+								</div>
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label class="control-label" for="basicText">Country</label> <input
+										class="form-control" type="text" th:field="*{address.country}"
+										/>
+								</div>
+							</div>
+						</div>
+						<!-- /.form-group -->
+						<div class="form-group clearfix">
+							<div class="pull-right">
+								<a href="#/" class="btn btn-default">Cancel</a>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</div>
+						<!-- /.form-group -->
+					</form>
+					<!-- /form -->
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.cols -->
+	</div>
+</div>

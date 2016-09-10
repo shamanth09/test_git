@@ -1,0 +1,188 @@
+<div class="content-body">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<h3 class="panel-title" th:text="${user.name}+'\'s relations'"></h3>
+				</div>
+				<!-- /panel-heading -->
+
+
+				<div
+					th:if="${user.userRoles[0].role.value} eq 'Retailer' or ${user.userRoles[0].role.value} eq 'Supplier'"
+					class="table-responsive">
+					<div class="col-md-6">
+						<div class="panel-body">
+							<h4 class="col-md-4">
+								Requested <span style="color: white;" class="badge badge-info"
+									th:text="${userRelations.totalSupplierOrRequest}"></span>
+							</h4>
+							<h4 class="col-md-4">
+								Accepted <span style="color: white;" class="badge badge-primary"
+									th:text="${userRelations.totalRetailerOrAccepted}"></span>
+							</h4>
+							<h4 class="col-md-4">
+								Rejected <span style="color: white;" class="badge badge-danger"
+									th:text="${userRelations.totalWholesalerOrRejected}"></span>
+							</h4>
+						</div>
+						<!-- /btn-toolbar -->
+
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>S-no</th>
+									<th>Wholesaler's Name</th>
+									<th>Status
+										<button class="btn btn-default btn-xs pull-right"
+											ng-click="addRelation('ROLE_WSALER')" title="add new relaion">
+											<i class="fa fa-plus"></i>
+										</button>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									th:attr="ng-click='relationClicked(\''+${relation.id}+'\');'"
+									th:each="relation,rowState : ${userRelations.wholesalers.content}">
+									<td th:text="${rowState.count}"></td>
+									<td
+										th:text="${relation.primaryUser.name}==${user.name}?${relation.secondaryUser.name}:${relation.primaryUser.name}"></td>
+									<td><label style="color: white;"
+										th:text="${relation.status}"
+										th:classappend="#{'relations.'+${relation.status}}"></label></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- <div th:if="${user.userRoles[0].role.value} eq 'Supplier'"
+					class="table-responsive">
+					<div class="col-md-6">
+						<div class="panel-body">
+								<h4 class="col-md-4">Requested <span class="badge badge-info" th:text="${userRelations.totalSupplierOrRequest}"></span></h4>
+								<h4 class="col-md-4">Accepted <span class="badge badge-primary" th:text="${userRelations.totalRetailerOrAccepted}"></span></h4>
+								<h4 class="col-md-4">Rejected <span class="badge badge-danger" th:text="${userRelations.totalWholesalerOrRejected}"></span></h4>
+							</div>
+
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>S-no</th>
+									<th>Wholesaler Name</th>
+									<th>Status<button class="btn btn-default btn-xs pull-right"
+						ng-click="addRelation('ROLE_WSALER')" title="add new relaion"><i class="fa fa-plus"></i></button></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									th:attr="ng-click='relationClicked(\''+${relation.id}+'\');'"
+									th:each="relation,rowState : ${userRelations.wholesalers.content}">
+									<td th:text="${rowState.count}"></td>
+									<td
+										th:text="${relation.primaryUser.name}==${user.name}?${relation.secondaryUser.name}:${relation.primaryUser.name}"></td>
+									<td><label th:text="${relation.status}"  th:classappend="#{'relations.'+${relation.status}}"></label></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div> -->
+				<div th:if="${user.userRoles[0].role.value} eq 'Wholesaler'"
+					class="table-responsive">
+					<div class="col-md-6">
+						<div class="panel-body">
+							<h4 class="col-md-4">
+								Requested <span style="color: white;" class="badge badge-info"
+									th:text="${userRelations.totalSupplierOrRequest}"></span>
+							</h4>
+							<h4 class="col-md-4">
+								Accepted <span style="color: white;" class="badge badge-primary"
+									th:text="${userRelations.totalRetailerOrAccepted}"></span>
+							</h4>
+							<h4 class="col-md-4">
+								Rejected <span style="color: white;" class="badge badge-danger"
+									th:text="${userRelations.totalWholesalerOrRejected}"></span>
+							</h4>
+						</div>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>S-no</th>
+									<th>Retailer Names</th>
+									<th>Status
+										<button class="btn btn-default btn-xs pull-right"
+											ng-click="addRelation('ROLE_RETAIL')" title="add new relaion">
+											<i class="fa fa-plus"></i>
+										</button>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									th:attr="ng-click='relationClicked(\''+${relation.id}+'\');'"
+									th:each="relation,rowState : ${userRelations.retailers.content}">
+									<td th:text="${rowState.count}"></td>
+									<td
+										th:text="${relation.primaryUser.name}==${user.name}?${relation.secondaryUser.name}:${relation.primaryUser.name}"></td>
+									<td><label style="color: white;"
+										th:text="${relation.status}"
+										th:classappend="#{'relations.'+${relation.status}}"></label></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-6">
+						<div class="panel-body">
+							<h4 class="col-md-4">
+								Requested <span style="color: white;" class="badge badge-info"
+									th:text="${userRelations.request}"></span>
+							</h4>
+							<h4 class="col-md-4">
+								Accepted <span style="color: white;" class="badge badge-primary"
+									th:text="${userRelations.accepted}"></span>
+							</h4>
+							<h4 class="col-md-4">
+								Rejected <span style="color: white;" class="badge badge-danger"
+									th:text="${userRelations.rejected}"></span>
+							</h4>
+						</div>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>S-no</th>
+									<th>Supplier Names</th>
+									<th>Status
+										<button  class="btn btn-default btn-xs pull-right"
+											ng-click="addRelation('ROLE_SUPPLIER')"
+											title="add new relaion">
+											<i class="fa fa-plus"></i>
+										</button>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									th:attr="ng-click='relationClicked(\''+${relation.id}+'\');'"
+									th:each="relation,rowState : ${userRelations.suppliers.content}">
+									<td th:text="${rowState.count}"></td>
+									<td
+										th:text="${relation.primaryUser.name}==${user.name}?${relation.secondaryUser.name}:${relation.primaryUser.name}"></td>
+									<td><label style="color: white;"
+										th:text="${relation.status}"
+										th:classappend="#{'relations.'+${relation.status}}"></label></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /panel -->
+		</div>
+	</div>
+</div>
+<script th:inline="javascript">
+userApp.value("user",{
+	"id":/*[[${user.id}]]*/
+});
+</script>

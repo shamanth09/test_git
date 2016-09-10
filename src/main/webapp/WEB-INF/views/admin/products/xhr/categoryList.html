@@ -1,0 +1,63 @@
+<div class="content-bar"
+	th:attr="ng-init='page.set('+${page.number+1}+','+${page.size}+','+${page.totalElements}+')'">
+	<!-- <div class="pull-right" role="group">
+		<a data-toggle="modal" href="#"
+			th:attr="data-scripts=@{/resources/assets/_includes/setups.js}"
+			data-target="#templateSetup" title="Template Setups"
+			aria-label="template setups"
+			class="btn btn-nofill btn-sm btn-default"><span
+			class="icon-settings fa-lg text-muted"></span></a>
+	</div> -->
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li class="active">Categories</li>
+	</ul>
+</div>
+<!-- /.content-bar -->
+
+<div class="content-body">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<h3 class="panel-title">Categories</h3>
+				</div>
+				<!-- /panel-heading -->
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S-no</th>
+								<th>Category</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:attr="ng-click='onClickCategory(\''+${category.id}+'\');'"
+								th:each="category,rowState : ${page.content}">
+								<td th:text="${pageable.offset+rowState.count}"></td>
+								<td th:text="${category.name}"></td>
+								<td
+									th:attr="ng-bind='formateDate(\''+${category.createTimestamp}+'\')'"></td>
+							</tr>
+						</tbody>
+					</table>
+
+
+				</div>
+				<div class="panel-footer">
+					<div class="pull-left">
+						<h5
+							th:text="'showing '+${pageable.offset+1}+' to '+${pageable.offset+totalcount}+' of '+${page.totalElements}+' entries'"></h5>
+					</div>
+					<div align="right">
+						<uib-pagination total-items="page.totalElements"
+							ng-model="page.number" max-size="7" boundary-links="true"
+							ng-change="page.pageChanged()"></uib-pagination>
+					</div>
+				</div>
+			</div>
+			<!-- /panel -->
+		</div>
+	</div>
+</div>

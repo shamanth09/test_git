@@ -1,0 +1,135 @@
+<script th:src="@{/resources/libs/jquery.validate.js}"></script>
+<div class="content-bar"
+	th:attr="ng-init='page.set('+${page.number+1}+','+${page.size}+','+${page.totalElements}+')'">
+    <div class="pull-right" role="group">
+            <a href="#/notregisterduserlist"   title="NotRegisteredUsers" aria-label="template setups" class="btn btn-nofill btn-sm btn-default"><span class="icon-people fa-lg text-muted"></span></a>
+          </div>
+	<ul class="breadcrumb breadcrumb-angle">
+		<li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+		<li class="active">Users</li>
+	</ul>
+</div>
+<!-- /.content-bar -->
+
+
+<div class="content-body" th:with="df=#{app.df.short}">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-heading">
+					<h3 class="panel-title">Users</h3>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<ui-select multiple="" ng-model="userFilter"
+							on-select="selectedUser($item)" on-remove="deselectUsers($item)"
+							theme="bootstrap" style="width: 100%;margin-left:10px">
+						<ui-select-match placeholder="User, Mobile, Email">{{$item.result}}
+						({{$item.label}}) </ui-select-match> <ui-select-choices
+							refresh="searchInUserTable($select.search)" position="down"
+							refresh-delay="0" repeat="result in results">
+						<div>
+							<span ng-bind-html="result.result | highlight: $select.search"></span><span
+								class="pull-right" ng-bind="result.label"></span>
+						</div>
+						</ui-select-choices></ui-select>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-xs-12 col-lg-offset-1">
+						<div class="" role="group" aria-label="Basic example">
+							<button ng-click="filterAccordingToStatus('ACCEPT')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid magenta"
+								style="color: RebeccaPurple;" title="ACCEPT"
+								ng-class="{'bg_User_buttonBackground' :  activeFlags.indexOf('ACCEPT')>=0}">
+								<i class="stat-icon fa fa-thumbs-o-up"></i>
+							</button>
+							<button ng-click="filterAccordingToStatus('ACTIVE')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid orange"
+								style="color: red;" title="ACTIVE"
+								ng-class="{'bg_User_buttonBackground': activeFlags.indexOf('ACTIVE')>=0}">
+								<i class="stat-icon fa fa-refresh"></i>
+							</button>
+							<button ng-click="filterAccordingToStatus('INPROCESS')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid yellow"
+								style="color: yellow;" title="INPROCESS"
+								ng-class="{'bg_User_buttonBackground' :  activeFlags.indexOf('INPROCESS')>=0}">
+								<i class="stat-icon fa fa-spinner"></i>
+							</button>
+							<button ng-click="filterAccordingToStatus('INACTIVE')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid palegreen"
+								style="color: ForestGreen;" title="INACTIVE"
+								ng-class="{'bg_User_buttonBackground' :  activeFlags.indexOf('INACTIVE')>=0}">
+								<i class="stat-icon fa fa-thumbs-o-down"></i>
+							</button>
+							<button ng-click="filterAccordingToStatus('REJECT')"
+								class="btn btn-secondary ng-pristine ng-untouched ng-valid btn-azure"
+								style="color: FireBrick;" title="REJECT"
+								ng-class="{'bg_User_buttonBackground' :  activeFlags.indexOf('REJECT')>=0}">
+								<i class="stat-icon fa fa-exclamation"></i>
+							</button>
+						</div>
+					</div>
+					<div class="col-lg-3"
+						style="margin-bottom: 15px; margin-left: 50px;">
+						<div data-my-daterangepicker="" id="reportrange"
+							class="pull-right" delete-dates="cancelDates(id)"
+							user-recent-list="filterUserAccordingToDate(fromDate, toDate)"
+							style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+							<i class="fa fa-calendar"></i>&nbsp; <span>{{dates}}</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- /panel-heading -->
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S-no</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Mobile</th>
+								<th>Role</th>
+								<th>Status</th>
+								<th>AddressTitle</th>
+								<th>CreatedOn</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:attr="ng-click='onClickUser(\''+${user.id}+'\');'"
+								th:each="user,rowState : ${page.Content}">
+								<td th:text="${pageable.offset+rowState.count}"></td>
+								<td th:text="${user.name}!=null?${user.name}:'Not Available'"></td>
+								<td th:text="${user.email}!=null?${user.email}:'Not Available'"></td>
+								<td
+									th:text="${user.mobile}!=null?${user.mobile}:'Not Available'"></td>
+								<td
+									th:text="${user.userRoles[0].role.value}!=null?${user.userRoles[0].role.value}:'Not Available'"></td>
+								<td
+									th:text="${user.activeFlag}!=null?${user.activeFlag}:'Not Available'"></td>
+								<td
+									th:text="${user.FirmName}!=null?${user.FirmName}:'Not Available'"></td>
+								<td
+									th:text="${user.createTimestamp}!=null?${#dates.format(user.createTimestamp,df)}:'Not Available'"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-left">
+						<h5
+							th:text="'showing '+${pageable.offset+1}+' to '+${totalcount+pageable.offset}+' of '+${page.totalElements}+' entries'"></h5>
+					</div>
+					<div align="right">
+						<uib-pagination total-items="page.totalElements"
+							ng-model="page.number" max-size="7" boundary-links="true"
+							ng-change="page.pageChanged()"></uib-pagination>
+					</div>
+				</div>
+			</div>
+			<!-- /panel -->
+		</div>
+	</div>
+</div>
+<script>
+	
+</script>

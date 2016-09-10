@@ -1,0 +1,462 @@
+<script th:src="@{/resources/libs/select2/js/select2.min.js}"
+	type="text/javascript"></script>
+<div class="content-hero content-hero-lg profilePage
+ user-profile"
+	ng-app="app.users">
+	<img class="content-hero-embed"
+		th:src="@{/resources/assets/images/dummy/people4.jpg}" alt="cover" />
+	<div class="content-hero-overlay bg-grd-teal"></div>
+	<div class="content-hero-body">
+		<div class="content-bar">
+			<ul class="breadcrumb breadcrumb-angle">
+				<li><a href="#" aria-label="home"><i class="fa fa-home"></i></a></li>
+				<li><a href="#/">Users</a></li>
+				<li class="active" th:text="${user.name}"></li>
+			</ul>
+		</div>
+		<!-- /.content-bar -->
+	</div>
+	<!-- /.content-hero-body -->
+	<div class="content-hero-bar">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="float-bar clearfix">
+					<div class="float-bar-brand">
+						<a class="kit-avatar kit-avatar-128 no-padding border-white"
+							onclick="return false;" href="#"> <img alt="cover"
+							th:src="@{/resources/assets/images/dummy/profile.jpg}" />
+						</a>
+					</div>
+					<div class="col-sm-8">
+						<div class="hidden-sm">
+							<h2 class="media-heading text-light" th:text="${user.name}"></h2>
+							<p class="text-light mb-4x">
+
+								<span class="mr-2x"><i class="fa fa-map-marker"></i> <span
+									th:text="${user.FirmName}"></span></span> <span class="mr-2x"><i
+									class="fa fa-phone"></i> <span
+									th:text="${user.mobile}!=null?${user.mobile}:'Not Available'"></span></span>
+								<span style="display: block;"><span class="mr-2x"><i
+										class="fa fa-envelope"></i> <span th:text="${user.email}"></span></span>
+									<span class="mr-2x label label-default"
+									th:text="${user.userRoles[0].role.value}!=null?${user.userRoles[0].role.value}:'Not Available'"></span>
+								</span>
+
+							</p>
+
+						</div>
+						<div class="mt-4x">
+							<p>
+								<span
+									th:text="${user.address.area}!=null?${user.address.area}:'Not Available'"></span>,<br />
+								<span
+									th:text="${user.address.city}!=null?${user.address.city}:'Not Available'"></span>,
+								<span
+									th:text="${user.address.pincode}!=null?${user.address.pincode}:'Not Available'"></span>
+							</p>
+						</div>
+					</div>
+					<!-- /.media-body -->
+				</div>
+				<!-- /.float-bar -->
+			</div>
+
+
+			<div class=" col-md-push-2 text-right" style="margin-right: 5px">
+				<a ng-href="#/users/{{user.id}}/edit-user" rel="button"
+					data-toggle="tooltip" data-container="body" title="Edit User"
+					aria-label="Send a Messege" class="btn btn-sm btn-default"><i
+					class="icon-note fa-fw"></i></a> <a data-toggle="modal"
+					ng-href="#/users/{{user.id}}/setting"
+					data-scripts="_includes/setups.js" data-target="#templateSetup"
+					title="Template Setups" aria-label="template setups"
+					class="btn btn-sm btn-default"><span
+					class="icon-settings fa-lg"></span></a>
+
+			</div>
+			<div class="col-lg-3">
+				<div class="row">
+					<div class="col-xs-6"
+						th:if="${user.userRoles[0].role.value} eq 'Retailer'">
+						<a ng-href="orders?activeId={{user.id}}"><span
+							class="headline"><strong
+								th:text="${countOfOrders.totalOrderCount}"></strong></span>
+							<p>Retailer Orders</p></a>
+					</div>
+					<div class="col-xs-6"
+						th:if="${user.userRoles[0].role.value} eq 'Supplier'">
+						<a ng-href="wholesalerorders?activeId={{user.id}}"><span
+							class="headline"><strong
+								th:text="${countOfOrders.totalOrderCount}"></strong></span>
+							<p>Supplier Orders</p></a>
+					</div>
+					<div th:if="${user.userRoles[0].role.value} eq 'Wholesaler'">
+						<div class="col-xs-6">
+							<a ng-href="orders?activeId={{user.id}}"><span
+								class="headline"><strong
+									th:text="${countOfOrders.totalOrderCount}"></strong></span>
+								<p>Retailer Orders</p></a>
+						</div>
+						<div class="col-xs-6">
+							<a th:href="'wholesalerorders?activeId='+${user.id}"><span
+								class="headline"><strong
+									th:text="${wholesalerOrderCount.totalOrderCount}"></strong></span>
+								<p>Supplier Orders</p></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="row">
+					<div id="linkWithHandSymbol"
+						th:if="${user.userRoles[0].role.value} eq 'Retailer'"
+						class="col-xs-6"
+						th:attr="ng-click='userRelations(\''+${user.id}+'\');'">
+						<span class="headline"><strong
+							th:text="${relationSummary.totalWholesalerOrRejected}"></strong></span>
+						<p>Wholesalers</p>
+					</div>
+					<div th:if="${user.userRoles[0].role.value} eq 'Wholesaler'">
+						<div id="linkWithHandSymbol" class="col-xs-6"
+							th:attr="ng-click='userRelations(\''+${user.id}+'\');'">
+							<span class="headline"><strong
+								th:text="${relationSummary.totalRetailerOrAccepted}"></strong></span>
+							<p>Retailers</p>
+						</div>
+						<div id="linkWithHandSymbol"
+							th:attr="ng-click='userRelations(\''+${user.id}+'\');'"
+							class="col-xs-6">
+							<span class="headline"><strong
+								th:text="${relationSummary.totalSupplierOrRequest}"></strong></span>
+							<p>Suppliers</p>
+						</div>
+					</div>
+					<div id="linkWithHandSymbol"
+						th:if="${user.userRoles[0].role.value} eq 'Supplier'"
+						th:attr="ng-click='userRelations(\''+${user.id}+'\');'"
+						class="col-xs-6">
+						<span class="headline"><strong
+							th:text="${relationSummary.totalWholesalerOrRejected}"></strong></span>
+						<p>Wholesalers</p>
+					</div>
+				</div>
+			</div>
+			<!-- /.cols -->
+		</div>
+		<!-- /.row -->
+	</div>
+</div>
+<!-- /.content-hero -->
+<div class="content-body">
+	<div class="row"
+		th:if="${user.userRoles[0].role.value} eq 'Wholesaler'">
+
+
+		<div class="col-md-6">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-body">
+					<h4 align="center">Retailer Order Status</h4>
+					<div class="col-lg-6 col-md-4 col-sm-2"
+						th:each="retailerOrdersCount : ${countOfOrders.orderSummary}">
+						<div class="panel fade in panel-default" data-init-panel="true">
+							<div class="panel-body"
+								style="background-color: rgba(245, 247, 250, 0.22)">
+								<div class="media">
+									<div class="media-left">
+										<span class="badge" style="margin-top: 10%; font-size: 260%;"
+											data-toggle="tooltip" th:text="${retailerOrdersCount.count}"
+											th:classappend="#{'orderStatus.'+${retailerOrdersCount.orderStatus}}">
+										</span>
+									</div>
+									<div class="media-body">
+										<h3 th:text="${retailerOrdersCount.orderStatus.value}"></h3>
+									</div>
+									<!-- /.media -body-->
+								</div>
+								<!-- /.media -->
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.cols -->
+
+		<div class="col-md-6">
+			<div class="panel" data-fill-color="true">
+				<div class="panel-body">
+					<h4 align="center">Supplier Order Status</h4>
+					<div class="col-lg-6 col-md-4 col-sm-2"
+						th:each=" wholesalerCount : ${wholesalerOrderCount.orderSummary}">
+						<div class="panel fade in panel-default" data-init-panel="true">
+							<div class="panel-body"
+								style="background-color: rgba(245, 247, 250, 0.22)">
+								<div class="media">
+									<div class="media-left">
+										<span class="badge" style="margin-top: 10%; font-size: 260%;"
+											data-toggle="tooltip" th:text="${wholesalerCount.count}"
+											th:classappend="#{'orderStatus.'+${wholesalerCount.orderStatus}}">
+										</span>
+									</div>
+									<div class="media-body">
+										<h3 th:text="${wholesalerCount.orderStatus.value}"></h3>
+									</div>
+									<!-- 	/.media -body -->
+								</div>
+								<!-- /.media -->
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<!-- /.cols -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- .row -->
+
+	<div class="row" th:if="${user.userRoles[0].role.value} eq 'Retailer'">
+		<h4 align="center">Wholesaler Order Status</h4>
+
+		<div class="col-lg-3 col-md-3 col-sm-2"
+			th:each="orderCount : ${countOfOrders.orderSummary}">
+			<div class="panel fade in panel-default" data-init-panel="true">
+				<div class="panel-body">
+					<div class="media">
+						<div class="media-left">
+							<span style="margin-top: 10%; font-size: 260%;"
+								data-toggle="tooltip" th:text="${orderCount.count}"
+								th:classappend="#{'orderStatus.'+${orderCount.orderStatus}}">
+							</span>
+						</div>
+						<div class="media-body">
+							<h3 th:text="${orderCount.orderStatus.value}"></h3>
+						</div>
+						<!-- /.media -body-->
+					</div>
+					<!-- /.media -->
+				</div>
+				<!-- /.panel-body -->
+
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.cols -->
+	</div>
+	<div class="row" th:if="${user.userRoles[0].role.value} eq 'Supplier'">
+		<h4 align="center">Wholesaler Order Status</h4>
+
+		<div class="col-lg-3 col-md-3 col-sm-2"
+			th:each="orderCount : ${countOfOrders.orderSummary}">
+			<div class="panel fade in panel-default" data-init-panel="true">
+				<div class="panel-body">
+					<div class="media">
+						<div class="media-left">
+							<span style="margin-top: 10%; font-size: 260%;"
+								data-toggle="tooltip" th:text="${orderCount.count}"
+								th:classappend="#{'orderStatus.'+${orderCount.orderStatus}}">
+							</span>
+						</div>
+						<div class="media-body">
+							<h3 th:text="${orderCount.orderStatus.value}"></h3>
+						</div>
+						<!-- /.media -body-->
+					</div>
+					<!-- /.media -->
+				</div>
+				<!-- /.panel-body -->
+
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.cols -->
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel fade in panel-default panel-fill"
+				data-fill-color="true">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-6 col-lg-offset-1">
+							<span th:if="${user.userRoles[0].role.value} eq 'Wholesaler'"
+								class="ml-1x mr-1x"><i
+								class="fa fa-square text-red mr-1x"></i>Supplier Orders</span> <span
+								class="ml-1x mr-1x"
+								th:if="${user.userRoles[0].role.value} eq 'Wholesaler'"><i
+								class="fa fa-square text-teal mr-1x"></i> Retailer Orders</span> <br
+								class="visible-md visible-xxs" /> <span class="ml-1x mr-1x"
+								th:if="${user.userRoles[0].role.value} eq 'Retailer'"><i
+								class="fa fa-square text-teal mr-1x"></i> Retailer Orders</span> <span
+								class="ml-1x mr-1x"
+								th:if="${user.userRoles[0].role.value} eq 'Supplier'"><i
+								class="fa fa-square text-red mr-1x"></i> Wholesaler Orders</span>
+						</div>
+						<div class="col-lg-4 ">
+							<div check="check" data-my-daterangepicker="" id="reportrange"
+								class="pull-right" delete-dates="cancelDates(id)"
+								change-date="reportChart(from,to)"
+								style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+								<i class="fa fa-calendar"></i>&nbsp; <span id="chartDates"></span>
+							</div>
+						</div>
+					</div>
+					<!-- /.row -->
+
+
+					<div th:if="${user.userRoles[0].role.value} eq 'Retailer'"
+						line-chart="" line-data="charData" line-xkey="y"
+						line-ykeys="['a']" line-labels="['Retailer Orders']"
+						line-colors="['#48CFAD']" line-x-label-angle="20"
+						parse-time="false"></div>
+
+					<div th:if="${user.userRoles[0].role.value} eq 'Wholesaler'"
+						line-chart="" line-data="charData" line-xkey="y"
+						line-ykeys="['a', 'b']"
+						line-labels="['Supplier Orders', 'Retailer orders']"
+						line-colors="['#ff6666', '#48CFAD']" line-x-label-angle="20"
+						parse-time="false"></div>
+
+					<div th:if="${user.userRoles[0].role.value} eq 'Supplier'"
+						line-chart="" line-data="charData" line-xkey="y"
+						line-ykeys="['a']" line-labels="['Wholesaler Orders']"
+						line-colors="['#ff9999']" line-x-label-angle="20"
+						parse-time="false"></div>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.col-md-12 -->
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-md-6"
+			th:if="${user.userRoles[0].role.value} eq 'Wholesaler'">
+			<div class="panel" data-context="info">
+				<div class="panel-heading"
+					style="background-color: rgba(255, 71, 0, 0.06)">
+					<button ng-disabled="disableAddButton == 1" style="margin: -3px"
+						class="btn btn-default btn-sm pull-right"
+						ng-click="addMeltAndSeal()" title="add new Melt and seal">
+						<i class="fa fa-plus"></i>
+					</button>
+					<h3 class="panel-title">Melting and seal</h3>
+				</div>
+				<!-- /.panel-heading -->
+				<!-- <div class="panel-body">
+					<div class="btn-toolbar clearfix" role="toolbar">
+						<div class="btn-group btn-group-sm pull-left">
+							<button data-toggle="tooltip" data-container="body" title=""
+								id="add-datatables1" class="btn btn-default" role="button"
+								data-original-title="add new record">
+								<i class="fa fa-plus"></i>
+							</button>
+						</div>
+					</div>
+					/btn-toolbar
+				</div> -->
+				<div class="panel-body table-responsive">
+					<table class="table table-condensed">
+						<thead>
+							<tr>
+								<td>#</td>
+								<td>Melting</td>
+								<td>Seal</td>
+								<td>Status</td>
+								<td>Edit</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="meltAndSeal in meltingAndSealValuesForTable"
+								ng-include="getTemplate(meltAndSeal)">
+							</tr>
+						</tbody>
+					</table>
+					<script type="text/ng-template" id="display">
+       					 <td>{{$index + 1}}</td>
+     					  <td>{{meltAndSeal.melting}}</td>
+							<td>{{meltAndSeal.seal}}</td>
+							<td><label ng-if="meltAndSeal.activeFlag == 'ACTIVE'" class="label bg_status_available" style="color: white;">{{meltAndSeal.activeFlag}}</label>
+								<label ng-if="meltAndSeal.activeFlag == 'INACTIVE'" class="label label-danger" style="color: white;">{{meltAndSeal.activeFlag}}</label></td>
+						 <td>
+         					   <button class="btn btn-default btn-xs" ng-click="editMeltingAndSeal(meltAndSeal)">Edit</button>
+     				  	 </td>
+   					 </script>
+					<script type="text/ng-template" id="edit">
+						 <td>{{$index + 1}}</td>
+       					 <td><input class="form-control input-sm" style="width: 100px" type="number" ng-model="meltingAndSealSelected.melting" required = "required"/></td>
+       					 <td><input class="form-control input-sm" style="width: 100px" type="text" ng-model="meltingAndSealSelected.seal" required = "required"/>
+							<input type="hidden" th:name="${_csrf!=null?_csrf.parameterName:null}"  th:attr="ng-init='meltingAndSealSelected._csrf=\''+${_csrf!=null?_csrf.token:null}+'\''"/>
+						</td>
+						<td>
+							<select class="form-control input-sm" ng-model="meltingAndSealSelected.activeFlag" style="width: 100px">
+								<option ng-repeat="status in statuses" ng-model="selected">{{status}}</option>
+							</select>
+						</td>
+       					 <td>
+							   <button ng-if="meltAndSeal.id != null" ng-click="updateMeltingAndSeal(meltingAndSealSelected)" class="btn btn-primary btn-xs">update</button>
+                      		   <button ng-if="meltAndSeal.id == null" ng-click="updateMeltingAndSeal(meltingAndSealSelected)" class="btn btn-primary btn-xs">Save</button>
+                     		   <button ng-if="meltAndSeal.id != null" ng-click="reset()" class="btn btn-default btn-xs">Reset</button>
+							   <button ng-if="meltAndSeal.id == null" ng-click="removeMeltAndSeal($index)" class="btn btn-default btn-xs">cancel</button>
+       					 </td>
+   					 </script>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.cols -->
+
+		<div class="col-md-6">
+			<div class="panel" data-context="info">
+				<div class="panel-heading"
+					style="background-color: rgba(255, 71, 0, 0.06)">
+					<h3 class="panel-title">Devices</h3>
+				</div>
+				<div class="panel-body table-responsive">
+					<table class="table table-condensed">
+						<thead>
+							<tr>
+								<td>#</td>
+								<td>DeviceToken</td>
+								<td>Client ID</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="device in userDevices">
+								<td>{{$index + 1}}</td>
+								<td>{{device.deviceToken}}</td>
+								<td>{{device.clientId}}</td>
+								<td><button class="btn btn-default btn-xs"
+										ng-click="deleteDevice(device)">Delete</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.panel-body -->
+			</div>
+			<!-- /.panel -->
+		</div>
+		<!-- /.cols -->
+
+	</div>
+
+</div>
+<!-- /.Content-body -->
+
+<script th:inline="javascript">
+	userApp.value("user",{
+		userRole:/*[[${user.userRoles[0].role.value}]]*/,
+		id:/*[[${user.id}]]*/,
+		name:/*[[${user.name}]]*/,
+		firmName:/*[[${user.firmName}]]*/,
+		mobile:/*[[${user.mobile}]]*/,
+	});
+	
+</script>

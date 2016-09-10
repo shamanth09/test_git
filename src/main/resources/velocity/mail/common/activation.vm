@@ -1,4 +1,4 @@
-<div class="well bordered-top bordered-bottom bordered-pink" style="text-align:center;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;min-height: 0;padding: 19px;margin-bottom: 30px;background-color: #57b5e3 ;border: 0;border-radius: 2px;-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);box-shadow: 0 0 3px rgba(0,0,0,.2);-webkit-border-radius: 2px;-webkit-background-clip: padding-box;-moz-border-radius: 2px;-moz-background-clip: padding;background-clip: padding-box;-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);color: #262626;position: relative;border-top: 5px solid #57b5e3;border-bottom: 5px solid #57b5e3;border-color: #57b5e3 !important;">
+<div class="well bordered-top bordered-bottom bordered-pink" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;min-height: 0;padding: 19px;margin-bottom: 30px;background-color: #57b5e3 ;border: 0;border-radius: 2px;-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);box-shadow: 0 0 3px rgba(0,0,0,.2);-webkit-border-radius: 2px;-webkit-background-clip: padding-box;-moz-border-radius: 2px;-moz-background-clip: padding;background-clip: padding-box;-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);color: #262626;position: relative;border-top: 5px solid #57b5e3;border-bottom: 5px solid #57b5e3;border-color: #57b5e3 !important;">
     <img src="http://www.myordershop.com/assets/img/logo.png" width="200"/>
    
    <div style="width:100%;margin-top: 20px;
@@ -9,12 +9,12 @@
 	<div style="border-top: 2px solid #e5e5e5;"></div>
 	</div>
 	
-	<div style="float: left;
+	<div style="float: left;text-align:center;
     text-decoration: none;
     color: #fff;
     padding: 5px;
     background: #57b5e3;
-    width: 15%;"> Hi ${userName}!</div>
+    width: 15%;"> Dear ${userName}!</div>
 	
 	<div style="padding-top: 13px;
     width: 38%;
@@ -27,10 +27,20 @@
    
 	<div class="well well-lg" style="margin-top:65px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;min-height: 0;padding: 24px;margin-bottom: 30px;background-color: #fbfbfb;border: 0;border-radius: 6px;-webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);box-shadow: 0 0 3px rgba(0,0,0,.2);-webkit-border-radius: 2px;-webkit-background-clip: padding-box;-moz-border-radius: 2px;-moz-background-clip: padding;background-clip: padding-box;-moz-box-shadow: 0 0 3px rgba(0,0,0,.2);color: #262626;position: relative;">
        <p style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;orphans: 3;widows: 3;margin: 0 0 10px;line-height: 22px;">
-        Confirm your email, and you'll be ready to manage your orders 
-        <a href="${activationUrl}" class="btn btn-darkorange" id="bootbox-options" style="text-decoration:none;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;margin: 0;font: inherit;color: #fff;overflow: visible;text-transform: none;-webkit-appearance: button;cursor: pointer;font-family: inherit;font-size: 13px;line-height: 1.42857143;display: inline-block;padding: 6px 12px;margin-bottom: 0;font-weight: 400;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 2px;position: relative;-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);-moz-box-shadow: 0 1px 0 rgba(0,0,0,.05);box-shadow: 0 1px 0 rgba(0,0,0,.05);-webkit-transition: all .15s ease;-moz-transition: all .15s ease;-o-transition: all .15s ease;transition: all .15s ease;-webkit-border-radius: 2px;-webkit-background-clip: padding-box;-moz-border-radius: 2px;-moz-background-clip: padding;background-clip: padding-box;background-color: #57b5e3 !important;border-color: #57b5e3;">Activate Your Account</a>
+        Congratulations. You have been successfully Signed up with www.myordershop.com. 
+        
     </p>
-                                    </div>
+    <p>Your  user login details are as mentioned  below,<table><tr><td>
+Username:</td><td><b>${email} / ${mobile}</b></td></tr><tr><td>
+Password:</td><td> <b>${password}</b></td></tr></table> </p>
+<p>Note: Please change the password once you login. </p>
+ 
+  <table><tr><td>
+  <a href="https://play.google.com/store/apps/details?id=com.mrkinnoapps.myordershopandroid&hl=en">
+<img src="http://lh3.googleusercontent.com/fhR9eIkBWnbDZJQXRGRbRndG9b80ZwxzjL19DBqddH4AAZS-y3huZy7w10bk8WxB1JI=w200" width= "150"></a></td><td></td><td>
+<a href="https://itunes.apple.com/in/app/my-order-shop/id1046219274">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Available_on_the_App_Store_%28black%29_SVG.svg/135px-Available_on_the_App_Store_%28black%29_SVG.svg.png" width= "130" height="40" ></a></td>
+    </tr></table></div>
 									
 									
 									   <div style="width:100%;margin-top: 20px;
@@ -41,7 +51,7 @@
 	<div style="border-top: 2px solid #e5e5e5;"></div>
 	</div>
 	
-	<div style="float: left;
+	<div style="float: left;text-align:center;
     text-decoration: none;
     color: #fff;
     padding: 5px;
@@ -58,15 +68,11 @@
 	
 	
 		<div style="padding-top: 20px;">
-	<p style="color:#fff;">We're super excited that you've joined us.</p>
-    <p style="color:#fff;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;
-box-sizing: border-box;orphans: 3;widows: 3;margin: 0 0 10px;line-height: 22px;">
-        Links not working? Paste this into your browser: <br/>
-		<a style="color:#fff;" href="${activationUrl}">${activationUrl}</a>
-		
-    </p>
 	
-	<p style="color:#fff;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;orphans: 3;widows: 3;margin: 0 0 10px;line-height: 22px;">
+   
+	
+	<p style="color:#fff;text-align:center;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;orphans: 3;widows: 3;line-height: 22px;">
+
        &copy; ${currentYear} MRK InnoApps Pvt Ltd | All Rights Reserved <br/>
 	   <a style="color:#fff;" href="#">Privacy Policy</a>
 		
